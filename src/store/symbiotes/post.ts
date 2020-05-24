@@ -36,9 +36,9 @@ const symbiotes = {
 
 export const { actions, reducer } = createSymbiote(initialState, symbiotes)
 
-export const getPosts = () => async (dispatch: Dispatch, getState: () => PostState) => {
+export const getPosts = () => async (dispatch: Dispatch, getState: () => { posts: PostState }) => {
   dispatch(actions.load.start())
-  const { page } = getState()
+  const { posts: { page } } = getState()
 
   try {
     const { data } = await axios.get('/post', {
@@ -47,6 +47,16 @@ export const getPosts = () => async (dispatch: Dispatch, getState: () => PostSta
       }
     })
     dispatch(actions.load.finish(data))
+  } catch (err) {
+    dispatch(actions.load.failed(err.message))
+  }
+}
+
+export const getPost = (alias: string) => async (dispatch: Dispatch, getState: () => PostState) => {
+  dispatch(actions.load.start())
+  try {
+    const { data } = await axios.get(`/post/${alias}`)
+    dispatch(actions.load.finish([data]))
   } catch (err) {
     dispatch(actions.load.failed(err.message))
   }

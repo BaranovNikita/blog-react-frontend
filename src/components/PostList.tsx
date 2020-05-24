@@ -6,7 +6,8 @@ interface Props {
   items: Post[],
   changePage: (page: number) => void,
   pageSize: number,
-  page: number
+  page: number,
+  total: number
 }
 
 export const PostList = (props: Props) => {
@@ -15,6 +16,7 @@ export const PostList = (props: Props) => {
       itemLayout="vertical"
       size="large"
       pagination={{
+        total: props.total,
         current: props.page,
         onChange: page => {
           props.changePage(page);
