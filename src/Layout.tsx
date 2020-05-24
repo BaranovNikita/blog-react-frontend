@@ -15,6 +15,7 @@ const BlogHeaderContainer = styled(Header)`
 const BlogContentContainer = styled(Content)`
   background: white;
   flex: 1;
+  padding: 50px;
 `
 
 const BlogLayoutContainer = styled(Content)`
