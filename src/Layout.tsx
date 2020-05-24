@@ -1,14 +1,17 @@
 import React, { ReactNode } from 'react'
 import { Layout } from 'antd'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 const { Header, Footer, Content } = Layout
 
 const BlogHeaderContainer = styled(Header)`
-  color: white;
-  &:hover {
-    color: red;
-    transition: color .3s;
+  a {
+    color: white;
+    &:hover {
+      color: red;
+      transition: color .3s;
+    }
   }
 `
 
@@ -30,8 +33,10 @@ interface Props {
 
 export const BlogLayout = (props: Props) => (
   <BlogLayoutContainer>
-    <BlogHeaderContainer>Header</BlogHeaderContainer>
+    <BlogHeaderContainer>
+      <Link to='/'>Blog</Link>
+    </BlogHeaderContainer>
     <BlogContentContainer>{ props.children }</BlogContentContainer>
-    <Footer>Footer</Footer>
+    <Footer>Baranov Nikita 2020</Footer>
   </BlogLayoutContainer>
 )
